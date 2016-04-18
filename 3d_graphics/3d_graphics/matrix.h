@@ -8,8 +8,8 @@ public:
 	Matrix();
 	Matrix(float a[4][4]);
 	~Matrix();
-	void MultiplyByVector(vector a);
-	void MultiplyBYMatrix(Matrix m);
+	vector MultiplyByVector(vector a);
+	Matrix MultiplyBYMatrix(Matrix m);
 	static Matrix Identity();
 	static Matrix Translate(vector a);
 	static Matrix Rotate(vector a,float angle);

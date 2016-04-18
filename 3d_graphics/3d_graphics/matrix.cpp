@@ -7,19 +7,50 @@ Matrix::Matrix()
 }
 Matrix::Matrix(float a[4][4])
 {
-
+	for (int i = 0; i < 4; i++)
+	{
+		for (int k = 0; k < 4; k++)
+		{
+			data[i][k] = a[i][k];
+		}
+	}
 }
 
 Matrix::~Matrix()
 {
 }
 
-void Matrix::MultiplyByVector(vector a)
+vector Matrix::MultiplyByVector(vector a)
 {
+	vector temp = vector(0, 0, 0);
+	temp.x = data[0][0] * a.x + data[0][1] * a.y + data[0][2] * a.z + data[0][3] * 1;
+	temp.y = data[1][0] * a.x + data[1][1] * a.y + data[1][2] * a.z + data[1][3] * 1;
+	temp.z = data[2][0] * a.x + data[2][1] * a.y + data[2][2] * a.z + data[2][3] * 1;
+
+	return temp;
 }
 
-void Matrix::MultiplyBYMatrix(Matrix m)
+Matrix Matrix::MultiplyBYMatrix(Matrix m)
 {
+	Matrix temp = Matrix();
+	for (int i = 0; i < 4; i++)
+	{
+		for (int k = 0; k < 4; k++)
+		{
+			temp.data[i][k] = 0;
+		}
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			for (int k = 0; k < 4; k++)
+			{
+				temp.data[i][k] = data[i][k]*m.data[k][j];
+			}
+		}
+	}
+	return temp;
 }
 
 Matrix Matrix::Identity()
