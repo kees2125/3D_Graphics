@@ -3,6 +3,13 @@
 
 
 
+vector::vector()
+{
+	x = 0;
+	y = 0;
+	z = 0;
+}
+
 vector::vector(float X, float Y, float Z)
 {
 	x = X;
