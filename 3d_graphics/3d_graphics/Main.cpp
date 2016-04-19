@@ -5,6 +5,7 @@
 #include <math.h>
 #include <stdio.h>
 #include "matrix.h"
+#include "shape.h"
 
 void init()
 {
@@ -20,51 +21,49 @@ int main()
 {
 	init();
 
-	int polygonindexescube[6][4] = { {0,1,2,3}, {4,5,6,7}, {0,1,5,4}, {1,2,6,5}, {2,3,7,6}, {3,0,4,7} };
+	int polygonindexespiramide[6][3] = { { 0,1,2 },{ 4,5,6 },{ 0,1,5 },{ 1,2,6 },{ 2,3,7 },{ 3,0,4 } };
 
-	vector a = vector(-1, -1, -1);
-	vector b = vector( 1, -1, -1);
-	vector c = vector( 1,  1, -1);
-	vector d = vector(-1,  1, -1);
-	vector e = vector(-1, -1,  1);
-	vector f = vector( 1, -1,  1);
-	vector g = vector( 1,  1,  1);
-	vector h = vector( -1, 1,  1);
+	vector pa = vector(-1, -1, 1);
+	vector pb = vector(1, -1, 1);
+	vector pc = vector(-1, -1, -1);
+	vector pd = vector(1, -1, -1);
+	vector pe = vector(0, 1, 0);
 
 	Matrix perspect = Matrix::Perspective(90, (6 / 8.0f), 0.1, 20);
 	Matrix translate = Matrix::Translate(vector(4, 0, 8));
 	//Matrix rotatie = Matrix::Rotate(vector(1,0,0), ALLEGRO_PI / 5);
-	int temp = 1;
+
+	Shape square = Shape(Shape::SHAPE_SQUARE);
+	
 	double t = al_get_time();
 	int angle = 0;
 	while (true)
 	{
 		if (al_get_time() - t > 0.1)
 		{
+			Shape shape = square;
 			ALLEGRO_COLOR color = ALLEGRO_COLOR();
 			al_clear_to_color(color);
 			color.g = 255;
 			//al_draw_line(1.0f, 1.0f, 200.0f, 200.0f, color , 1.0f);
 			
-			vector list[8] = { a,b,c,d,e,f,g,h };
-			
 			for (int i = 0; i < 8; i++)
 			{
-				Matrix rotatie = Matrix::Rotate(vector(1, 1, 1), (ALLEGRO_PI / 16) * angle);
-				list[i] = rotatie.MultiplyByVector(list[i]);
-				list[i] = perspect.MultiplyByVector(list[i]);
-				list[i] = translate.MultiplyByVector(list[i]);
+				Matrix rotatie = Matrix::Rotate(vector(0, 1, 0), (ALLEGRO_PI / 16) * angle);
+				shape.vectors[i] = rotatie.MultiplyByVector(shape.vectors[i]);
+				shape.vectors[i] = perspect.MultiplyByVector(shape.vectors[i]);
+				shape.vectors[i] = translate.MultiplyByVector(shape.vectors[i]);
 			}
 
 			for (int i = 0; i < 6; i++)
 			{
 				for (int p = 0; p < 3; p++)
 				{
-					al_draw_line(160 + list[polygonindexescube[i][p]].x / list[polygonindexescube[i][p]].z * 150, 210 + list[polygonindexescube[i][p]].y / list[polygonindexescube[i][p]].z * 200, 160 + list[polygonindexescube[i][p + 1]].x / list[polygonindexescube[i][p + 1]].z * 150, 210 + list[polygonindexescube[i][p + 1]].y / list[polygonindexescube[i][p + 1]].z * 200, color, 1.0f);
+					al_draw_line(160 + shape.vectors[shape.polygonindexes[i][p]].x / shape.vectors[shape.polygonindexes[i][p]].z * 150, 210 + shape.vectors[shape.polygonindexes[i][p]].y / shape.vectors[shape.polygonindexes[i][p]].z * 200, 160 + shape.vectors[shape.polygonindexes[i][p + 1]].x / shape.vectors[shape.polygonindexes[i][p + 1]].z * 150, 210 + shape.vectors[shape.polygonindexes[i][p + 1]].y / shape.vectors[shape.polygonindexes[i][p + 1]].z * 200, color, 1.0f);
 				}
-				al_draw_line(160 + list[polygonindexescube[i][3]].x / list[polygonindexescube[i][3]].z * 150, 210 + list[polygonindexescube[i][3]].y / list[polygonindexescube[i][3]].z * 200, 160 + list[polygonindexescube[i][0]].x / list[polygonindexescube[i][0]].z * 150, 210 + list[polygonindexescube[i][0]].y / list[polygonindexescube[i][0]].z * 200, color, 1.0f);
+				al_draw_line(160 + shape.vectors[shape.polygonindexes[i][3]].x / shape.vectors[shape.polygonindexes[i][3]].z * 150, 210 + shape.vectors[shape.polygonindexes[i][3]].y / shape.vectors[shape.polygonindexes[i][3]].z * 200, 160 + shape.vectors[shape.polygonindexes[i][0]].x / shape.vectors[shape.polygonindexes[i][0]].z * 150, 210 + shape.vectors[shape.polygonindexes[i][0]].y / shape.vectors[shape.polygonindexes[i][0]].z * 200, color, 1.0f);
 			}
-			//al_draw_line(listTemp[0].x, listTemp[0].y, listTemp[7].x, listTemp[7].y, a, 1.0f);
+			//al_draw_line(shape.vectorsTemp[0].x, shape.vectorsTemp[0].y, shape.vectorsTemp[7].x, shape.vectorsTemp[7].y, a, 1.0f);
 			al_flip_display();
 			t = al_get_time();
 			angle++;
