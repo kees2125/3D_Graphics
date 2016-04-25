@@ -17,7 +17,7 @@ bool Cube::pointInCube(float x, float y, float z)
 	return false;
 }
 
-void drawCube()
+void tmp12::Cube::drawCube()
 {
 	glBegin(GL_QUADS); // leftside *
 	glColor3f(1.0f, 0.0f, 0.0f);
