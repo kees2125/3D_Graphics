@@ -12,6 +12,7 @@ static float playerY = 0;
 static float playerZ = -10;
 static float playerYaw = 0;
 static float playerPitch = 0;
+static bool ortho = false;
 
 static int mouseX, mouseY;
 
@@ -114,7 +115,14 @@ void reshape(GLint width, GLint height)
 	glViewport(0, 0, g_Width, g_Height);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(65.0, (float)g_Width / g_Height, g_nearPlane, g_farPlane);
+	if (ortho)
+	{
+		glOrtho(-g_Width*0.01, g_Width*0.01, g_Height*0.01, -g_Height*0.01, 1, 1000);
+	}
+	else
+	{
+		gluPerspective(65.0, (float)g_Width / g_Height, g_nearPlane, g_farPlane);
+	}
 	glMatrixMode(GL_MODELVIEW);
 }
 void keyHandler(unsigned char key, int x, int y)
@@ -150,6 +158,16 @@ void keyHandler(unsigned char key, int x, int y)
 			break;
 		case'3':
 			rotateMode = 3;
+			break;
+		case '4':
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+			break;
+		case '5':
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			break;
+		case '6':
+			ortho = !ortho;
+			reshape(g_Width, g_Height);
 			break;
 	}
 }
