@@ -3,11 +3,14 @@
 class Shape
 {
 public:
-	enum type { SHAPE_SQUARE, SHAPE_PIRAMIDE };
-	int polygonindexes[6][4];
+	enum type { SHAPE_SQUARE, SHAPE_PIRAMIDE, SHAPE_PIN };
+	type thistype;
+	int polygonindexes[100][4];
 	int polygonsize;
-	vector vectors[8];
+	int polygoncount;
+	vector vectors[100];
 	Shape(type);
 	void createCube();
 	void createPiramide();
+	void createPin();
 };
