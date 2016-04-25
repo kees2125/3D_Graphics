@@ -46,7 +46,9 @@ void initskybox()
 	}
 
 	int width, height, bpp;
-	unsigned char* l = stbi_load("leftS.png", &width, &height, &bpp, 4);
+	unsigned char* l = stbi_load("resources/leftS.png", &width, &height, &bpp, 4);
+	/*if (!l)
+		printf("%s\n", stbi_failure_reason());*/
 	glBindTexture(GL_TEXTURE_2D, skyBox[SKY_LEFT]);
 	glTexImage2D(GL_TEXTURE_2D,
 		0,		//level
@@ -59,7 +61,8 @@ void initskybox()
 		l);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); //if the texture is smaller, than the image, we get the avarege of the pixels next to it
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	unsigned char* ba = stbi_load("backS.png", &width, &height, &bpp, 4);
+
+	unsigned char* ba = stbi_load("resources/backS.png", &width, &height, &bpp, 4);
 	glBindTexture(GL_TEXTURE_2D, skyBox[SKY_BACK]);
 	glTexImage2D(GL_TEXTURE_2D,
 		0,		//level
@@ -72,7 +75,7 @@ void initskybox()
 		ba);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); //if the texture is smaller, than the image, we get the avarege of the pixels next to it
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	unsigned char* r = stbi_load("rightS.png", &width, &height, &bpp, 4);
+	unsigned char* r = stbi_load("resources/rightS.png", &width, &height, &bpp, 4);
 	glBindTexture(GL_TEXTURE_2D, skyBox[SKY_RIGHT]);
 	glTexImage2D(GL_TEXTURE_2D,
 		0,		//level
@@ -85,7 +88,7 @@ void initskybox()
 		r);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); //if the texture is smaller, than the image, we get the avarege of the pixels next to it
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	unsigned char* f = stbi_load("frontS.png", &width, &height, &bpp, 4);
+	unsigned char* f = stbi_load("resources/frontS.png", &width, &height, &bpp, 4);
 	glBindTexture(GL_TEXTURE_2D, skyBox[SKY_FRONT]);
 	glTexImage2D(GL_TEXTURE_2D,
 		0,		//level
@@ -98,7 +101,7 @@ void initskybox()
 		f);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); //if the texture is smaller, than the image, we get the avarege of the pixels next to it
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	unsigned char* t = stbi_load("topS.png", &width, &height, &bpp, 4);
+	unsigned char* t = stbi_load("resources/topS.png", &width, &height, &bpp, 4);
 	glBindTexture(GL_TEXTURE_2D, skyBox[SKY_TOP]);
 	glTexImage2D(GL_TEXTURE_2D,
 		0,		//level
@@ -111,7 +114,7 @@ void initskybox()
 		t);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); //if the texture is smaller, than the image, we get the avarege of the pixels next to it
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	unsigned char* bo = stbi_load("bottomS.png", &width, &height, &bpp, 4);
+	unsigned char* bo = stbi_load("resources/bottomS.png", &width, &height, &bpp, 4);
 	glBindTexture(GL_TEXTURE_2D, skyBox[SKY_BOTTOM]);
 	glTexImage2D(GL_TEXTURE_2D,
 		0,		//level
@@ -133,6 +136,7 @@ void killskybox()
 }
 void drawSkybox(float size)
 {
+	glColor3f(1, 1, 1);
 	bool b1 = glIsEnabled(GL_TEXTURE_2D);     //new, we left the textures turned on, if it was turned on
 	glDisable(GL_LIGHTING); //turn off lighting, when making the skybox
 	glDisable(GL_DEPTH_TEST);       //turn off depth texting
@@ -223,8 +227,9 @@ void onDisplay()
 	
 	glRotatef(player.yaw, 1, 0, 0);
 	glRotatef(player.pitch, 0, 1, 0);
+	drawSkybox(1000.0f);
 	glTranslatef(player.x, player.z, player.y);
-	drawSkybox(400.0f);
+	
 	cube.drawCube();
 	
 

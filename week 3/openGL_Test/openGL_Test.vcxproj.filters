@@ -52,12 +52,6 @@
     <Image Include="resources\leftS.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="resources\rightS.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\topS.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="resources\frontS.png">
       <Filter>Resource Files</Filter>
     </Image>

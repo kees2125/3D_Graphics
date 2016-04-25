@@ -19,6 +19,8 @@ bool Cube::pointInCube(float x, float y, float z)
 
 void tmp12::Cube::drawCube()
 {
+	glRotatef(pitch, 1, 0, 0);
+	glRotatef(yaw, 0, 1, 0);
 	glBegin(GL_QUADS); // leftside *
 	glColor3f(1.0f, 0.0f, 0.0f);
 	glVertex3f(-1, 1, 1);
