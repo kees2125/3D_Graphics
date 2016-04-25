@@ -271,14 +271,24 @@ void keyboardUp(unsigned char key, int, int)
 {
 	keys[key] = false;
 }
+
+
+bool movedCursor = false;
 void mouseMoveFuct(int x, int y)
 {
+	if (movedCursor)
+	{
+		movedCursor = false;
+		return;
+	}
 	int dx = x - g_Width / 2;
 	int dy = y - g_Height / 2;
 	if ((dx != 0 || dy != 0) && abs(dx) < 400 && abs(dy) < 400)
 	{
 		player.pitch += dx / 10.0f;
 		player.yaw += dy / 10.0f;
+		
+		movedCursor = true;
 		glutWarpPointer(g_Width / 2, g_Height / 2);
 	}
 }
