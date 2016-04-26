@@ -7,5 +7,6 @@ namespace tmp12 {
 		Player();
 		~Player();
 		float speed;
+		void draw();
 	};
 }

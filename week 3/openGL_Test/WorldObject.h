@@ -12,6 +12,7 @@ namespace tmp12 {
 		WorldObject();
 		~WorldObject();
 		virtual bool pointInObject(float x, float y, float z);
+		virtual void draw()=0;
 		float x;
 		float y;
 		float z;

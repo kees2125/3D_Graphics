@@ -4,7 +4,7 @@
 #include "Player.h"
 #include "Cube.h"
 #include "skyBox.h"
-#include <stdlib.h>
+#include <vector>
 
 
 
@@ -16,30 +16,36 @@ static int g_Height = 600;                         // Initial window height
 static char keys[255];
 static int mouseX, mouseY;
 float lastFrameTime = 0;
+std::vector<WorldObject *> worldObjects;
+std::vector<WorldObject *>::size_type worldObjects_size;
 Player player;
-Cube cube;
 skyBox skybox;
 
 void init()
 {
 
-
 	for (int i = 0; i < 255; i++)
 	{
 		keys[i] = 0;
 	}
-	cube.cubeID = 7;
-	cube.x = 2;
-	cube.y = 0;
-	cube.z = 2;
-	cube.size = 1;
-	for (int i = 0; i < 10;i++)
+	
+	
+}
+void initWorld()
+{
+	Cube::initCube();
+	for (int y = 0; y < 4;y++)
 	{
-		for (int k = 0; k < 10; k++)
+		for (int z = -10; z < 10; z++)
 		{
-			//7
+			for (int x = -10; x < 10;x++)
+			{
+				worldObjects.push_back(new Cube(x, y, z, 0.5f, y+z, 0, 0));
+			}
 		}
 	}
+
+	worldObjects_size = worldObjects.size();
 }
 void move(float angle, float fac) 
 {
@@ -70,11 +76,13 @@ void onDisplay()
 	glRotatef(player.pitch, 0, 1, 0);
 	skybox.drawSkybox(1000.0f);
 	glTranslatef(player.x, player.z, player.y);
-	
-	glDisable(GL_LIGHTING);
-	cube.drawCube();
-	
 
+	glDisable(GL_LIGHTING);
+	
+	for (unsigned int i = 0; i < worldObjects_size;i++)
+	{
+		worldObjects[i]->draw();
+	}
 	
 
 	
@@ -154,5 +162,6 @@ int main(int argc, char *argv[])
 	glutKeyboardUpFunc(keyboardUp);
 	glutPassiveMotionFunc(mouseMoveFuct);
 	glutIdleFunc(idle);
+	initWorld();
 	glutMainLoop();
 }

@@ -17,3 +17,7 @@ Player::Player()
 Player::~Player()
 {
 }
+
+void tmp12::Player::draw()
+{
+}
