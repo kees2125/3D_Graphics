@@ -15,11 +15,13 @@ static int g_Width = 800;                          // Initial window width
 static int g_Height = 600;                         // Initial window height
 static char keys[255];
 static int mouseX, mouseY;
+bool godMode = 1;
 float lastFrameTime = 0;
 std::vector<WorldObject *> worldObjects;
 std::vector<WorldObject *>::size_type worldObjects_size;
 Player player;
 skyBox skybox;
+
 
 void init()
 {
@@ -40,7 +42,7 @@ void initWorld()
 		{
 			for (int x = -10; x < 10;x++)
 			{
-				worldObjects.push_back(new Cube(x, y, z, 0.5f, y+z, 0, 0));
+				worldObjects.push_back(new Cube(x, y, z, 1.0f, y+z, 0, 0));
 			}
 		}
 	}
@@ -92,14 +94,36 @@ void idle()
 {
 	float frameTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
 	float deltaTime = frameTime - lastFrameTime;
+	bool colided = false;
 	lastFrameTime = frameTime;
-
-	if (keys['a']) move(0, deltaTime*player.speed);
-	if (keys['d']) move(180, deltaTime*player.speed);
-	if (keys['w']) move(90, deltaTime*player.speed);
-	if (keys['s']) move(270, deltaTime*player.speed);
-	if (keys[32]) moveVertical(true, deltaTime);
-	if (keys['z']) moveVertical(false, deltaTime);
+	if (!player.gravityEffected)
+	{
+		if (keys[32]) moveVertical(true, deltaTime);
+		if (keys['z']) moveVertical(false, deltaTime);
+	}
+	else
+	{
+		for (unsigned int i = 0; i < worldObjects_size;i++)
+		{
+			if (worldObjects[i]->cubeInObject(player.xMin,player.xMax,player.yMin,player.yMax,player.zMin,player.zMax))
+			{
+				colided = true;
+				printf("true");
+				break;
+			}
+		}
+		if (!colided)
+		{
+			moveVertical(false, 0.01f);
+		}
+	}
+	if (!player.gravityEffected ||colided)
+	{
+		if (keys['a']) move(0, deltaTime*player.speed);
+		if (keys['d']) move(180, deltaTime*player.speed);
+		if (keys['w']) { move(90, deltaTime*player.speed); printf("%f,%f,%f\n", player.x, player.y, player.z); }
+		if (keys['s']) move(270, deltaTime*player.speed);
+	}
 	glutPostRedisplay();
 	
 }
@@ -120,7 +144,9 @@ void keyHandler(unsigned char key, int x, int y)
 		exit(0);
 		skybox.killskybox();
 	}
+	if (key == 'g') player.gravityEffected = !player.gravityEffected;
 	keys[key] = true;
+	
 }
 void keyboardUp(unsigned char key, int, int)
 {

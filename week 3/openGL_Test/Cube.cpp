@@ -17,6 +17,12 @@ tmp12::Cube::Cube(float X, float Y, float Z, float Size, int ID, float Pitch, fl
 	cubeID = ID;
 	pitch = Pitch;
 	yaw = Yaw;
+	xMin = -size / 2 + x;
+	xMax =  size / 2 + x;
+	yMin = -size / 2 + y;
+	yMax =  size / 2 + y;
+	zMin = -size / 2 + z;
+	zMax =  size / 2 + z;
 }
 
 
@@ -26,10 +32,42 @@ Cube::~Cube()
 {
 }
 
-bool Cube::pointInCube(float x, float y, float z)
+bool tmp12::Cube::pointInObject(float X, float Y, float Z)
 {
+	if (X >= xMin)
+	{
+		if (X <= xMax)
+		{
+			if (Y >= yMin)
+			{
+				if (Y <= yMax)
+				{
+					if (Z >= zMin)
+					{
+						if (Z <= zMax)
+						{
+							return true;
+						}
+					}
+				}
+			}
+		}
+	}
 	return false;
 }
+
+bool tmp12::Cube::cubeInObject(float Xmin, float Xmax, float Ymin, float Ymax, float Zmin, float Zmax)
+{
+	return(xMax > Xmin &&
+		xMin < Xmax &&
+		yMax > Ymin &&
+		yMin < Ymax &&
+		zMax > Zmin &&
+		zMin < Zmax);
+
+}
+
+
 
 void Cube::draw()
 {

@@ -1,3 +1,6 @@
-﻿  Cube.cpp
-c:\users\kees zijlmans\documents\github\3d_graphics\week 3\opengl_test\cube.cpp(38): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+﻿  Main.cpp
+c:\users\kees zijlmans\documents\github\3d_graphics\week 3\opengl_test\main.cpp(45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Cube.cpp
+c:\users\kees zijlmans\documents\github\3d_graphics\week 3\opengl_test\cube.cpp(76): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  Generating Code...
   openGL_Test.vcxproj -> C:\Users\kees zijlmans\Documents\GitHub\3D_Graphics\week 3\Debug\openGL_Test.exe

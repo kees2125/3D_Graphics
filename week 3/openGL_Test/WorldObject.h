@@ -12,6 +12,7 @@ namespace tmp12 {
 		WorldObject();
 		~WorldObject();
 		virtual bool pointInObject(float x, float y, float z);
+		virtual bool cubeInObject(float Xmin, float Xmax, float Ymin, float Ymax, float Zmin, float Zmax);
 		virtual void draw()=0;
 		float x;
 		float y;

@@ -17,3 +17,8 @@ bool tmp12::WorldObject::pointInObject(float x, float y, float z)
 {
 	return false;
 }
+
+bool tmp12::WorldObject::cubeInObject(float Xmin, float Xmax, float Ymin, float Ymax, float Zmin, float Zmax)
+{
+	return false;
+}

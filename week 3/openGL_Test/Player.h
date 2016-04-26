@@ -8,5 +8,14 @@ namespace tmp12 {
 		~Player();
 		float speed;
 		void draw();
+		float height;
+		float width;
+		float depth;
+		float xMin;
+		float xMax;
+		float yMin;
+		float yMax;
+		float zMin;
+		float zMax;
 	};
 }
