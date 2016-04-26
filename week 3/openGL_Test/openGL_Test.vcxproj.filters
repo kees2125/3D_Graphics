@@ -27,6 +27,9 @@
     <ClCompile Include="WorldObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="skyBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cube.h">
@@ -41,19 +44,8 @@
     <ClInclude Include="stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="resources\backS.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\bottomS.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\leftS.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\frontS.png">
-      <Filter>Resource Files</Filter>
-    </Image>
+    <ClInclude Include="skyBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

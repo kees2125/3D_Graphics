@@ -10,7 +10,7 @@ Player::Player()
 	z = 0;
 	pitch = 0;
 	yaw = 0;
-	speed = 0.4f;
+	speed = 3.0f;
 }
 
 

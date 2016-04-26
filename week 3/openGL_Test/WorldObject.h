@@ -1,5 +1,10 @@
 #pragma once
 #include <GL\freeglut.h>
+#define _USE_MATH_DEFINES
+#include <cstdio>
+#include <cmath>
+#include "stb_image.h"
+
 namespace tmp12 {
 	class WorldObject
 	{
