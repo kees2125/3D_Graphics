@@ -14,8 +14,6 @@ Cube::Cube()
 		if (!l)
 			printf("%s\n", stbi_failure_reason());
 		glBindTexture(GL_TEXTURE_2D, textureLiberyID);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); //if the texture is smaller, than the image, we get the avarege of the pixels next to it
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); //same if the image bigger
 		glTexImage2D(GL_TEXTURE_2D,
 			0,		//level
 			GL_RGBA,		//internal format
@@ -25,6 +23,8 @@ Cube::Cube()
 			GL_RGBA,		//data format
 			GL_UNSIGNED_BYTE,	//data type
 			l);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); //if the texture is smaller, than the image, we get the avarege of the pixels next to it
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); //same if the image bigger
 	}
 }
 
@@ -40,6 +40,7 @@ bool Cube::pointInCube(float x, float y, float z)
 
 void tmp12::Cube::drawCube()
 {
+	glColor3f(1, 1, 1);
 	float multiplier = 1 / 16;
 	int cubeIDY =  floor(cubeID / 16);
 	int cubeIDX = cubeID - cubeIDY * 16;
@@ -47,20 +48,23 @@ void tmp12::Cube::drawCube()
 	float aY = cubeIDY*multiplier;		//left bind location for Y replace the 0 with this
 	float bX = aX + multiplier;			//left bind location for x replace the 1 with this
 	float bY = aY + multiplier;			//left bind location for Y replace the 1 with this
+	aX = 0;
+	aY = 0;
+	bX = 1;
+	bY = 1;
 	glRotatef(pitch, 1, 0, 0);
 	glRotatef(yaw, 0, 1, 0);
-
 	glEnable(GL_TEXTURE_2D);        //and turn on texturing
 	glBindTexture(GL_TEXTURE_2D, textureLiberyID);  //use the texture we want
 	glBegin(GL_QUADS);      //and draw a face
 							//back face
-	glTexCoord2f(aX, aY);      //use the correct texture coordinate
+	glTexCoord2f(bX, bY);      //use the correct texture coordinate
 	glVertex3f(size / 2 +x, size / 2 + y, size / 2 + z);       //and a vertex
-	glTexCoord2f(bX, aY);      //and repeat it...
+	glTexCoord2f(aX, bY);      //and repeat it...
 	glVertex3f(-size / 2 + x, size / 2 + y, size / 2 + z);
-	glTexCoord2f(bX, bY);
+	glTexCoord2f(aX, aY);
 	glVertex3f(-size / 2 + x, -size / 2 + y, size / 2 + z);
-	glTexCoord2f(aX, bY);
+	glTexCoord2f(bX, aY);
 	glVertex3f(size / 2 + x, -size / 2 + y, size / 2 + z);
 	glEnd();
 	//glBindTexture(GL_TEXTURE_2D, skyBoxSides[SKY_LEFT]);

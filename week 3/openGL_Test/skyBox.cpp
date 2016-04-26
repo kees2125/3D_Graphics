@@ -23,7 +23,7 @@ void skyBox::initskybox()
 	int width, height, bpp;
 		for (int x = 0; x < 6; x++)
 		{
-			glGenTextures(1, &skyBoxSides[skyBoxSides[x]]);
+			glGenTextures(1, &skyBoxSides[x]);
 		}
 
 		unsigned char* l = stbi_load("resources/leftS.png", &width, &height, &bpp, 4);
@@ -32,8 +32,7 @@ void skyBox::initskybox()
 		glBindTexture(GL_TEXTURE_2D, skyBoxSides[SKY_LEFT]);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); //if the texture is smaller, than the image, we get the avarege of the pixels next to it
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); //same if the image bigger
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);      //we repeat the pixels in the edge of the texture, it will hide that 1px wide line at the edge of the cube, which you have seen in the video
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
 		glTexImage2D(GL_TEXTURE_2D,
 			0,		//level
 			GL_RGBA,		//internal format
@@ -49,8 +48,7 @@ void skyBox::initskybox()
 		glBindTexture(GL_TEXTURE_2D, skyBoxSides[SKY_BACK]);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); //if the texture is smaller, than the image, we get the avarege of the pixels next to it
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); //same if the image bigger
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);      //we repeat the pixels in the edge of the texture, it will hide that 1px wide line at the edge of the cube, which you have seen in the video
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
 		glTexImage2D(GL_TEXTURE_2D,
 			0,		//level
 			GL_RGBA,		//internal format
@@ -64,8 +62,7 @@ void skyBox::initskybox()
 		glBindTexture(GL_TEXTURE_2D, skyBoxSides[SKY_RIGHT]);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); //if the texture is smaller, than the image, we get the avarege of the pixels next to it
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); //same if the image bigger
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);      //we repeat the pixels in the edge of the texture, it will hide that 1px wide line at the edge of the cube, which you have seen in the video
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
 		glTexImage2D(GL_TEXTURE_2D,
 			0,		//level
 			GL_RGBA,		//internal format
@@ -79,8 +76,7 @@ void skyBox::initskybox()
 		glBindTexture(GL_TEXTURE_2D, skyBoxSides[SKY_FRONT]);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); //if the texture is smaller, than the image, we get the avarege of the pixels next to it
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); //same if the image bigger
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);      //we repeat the pixels in the edge of the texture, it will hide that 1px wide line at the edge of the cube, which you have seen in the video
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
 		glTexImage2D(GL_TEXTURE_2D,
 			0,		//level
 			GL_RGBA,		//internal format
@@ -94,8 +90,7 @@ void skyBox::initskybox()
 		glBindTexture(GL_TEXTURE_2D, skyBoxSides[SKY_TOP]);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); //if the texture is smaller, than the image, we get the avarege of the pixels next to it
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); //same if the image bigger
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);      //we repeat the pixels in the edge of the texture, it will hide that 1px wide line at the edge of the cube, which you have seen in the video
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
 		glTexImage2D(GL_TEXTURE_2D,
 			0,		//level
 			GL_RGBA,		//internal format
@@ -109,8 +104,6 @@ void skyBox::initskybox()
 		glBindTexture(GL_TEXTURE_2D, skyBoxSides[SKY_BOTTOM]);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); //if the texture is smaller, than the image, we get the avarege of the pixels next to it
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); //same if the image bigger
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);      //we repeat the pixels in the edge of the texture, it will hide that 1px wide line at the edge of the cube, which you have seen in the video
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 		glTexImage2D(GL_TEXTURE_2D,
 			0,		//level
 			GL_RGBA,		//internal format

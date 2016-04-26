@@ -1,2 +1,3 @@
-﻿  Main.cpp
+﻿  skyBox.cpp
+c:\users\kees zijlmans\documents\github\3d_graphics\week 3\opengl_test\skybox.cpp(122): warning C4800: 'GLboolean': forcing value to bool 'true' or 'false' (performance warning)
   openGL_Test.vcxproj -> C:\Users\kees zijlmans\Documents\GitHub\3D_Graphics\week 3\Debug\openGL_Test.exe

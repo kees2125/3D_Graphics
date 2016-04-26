@@ -8,7 +8,7 @@ namespace tmp12 {
 		~Cube();
 		bool pointInCube(float x, float y, float z);
 		int cubeID;
-		float size = 1.0f;
+		float size = 0.5f;
 		void drawCube();
 	private:
 		

@@ -22,10 +22,7 @@ skyBox skybox;
 
 void init()
 {
-	/*int width, height, bpp;
-	skyBox = stbi_load("forrest-skybox.png", &width, &height, &bpp, 4);
-	glTexImage2D(..);
-	stbi_image_free(imgData);*/
+
 
 	for (int i = 0; i < 255; i++)
 	{
@@ -35,6 +32,7 @@ void init()
 	cube.x = 2;
 	cube.y = 0;
 	cube.z = 2;
+	cube.size = 1;
 	for (int i = 0; i < 10;i++)
 	{
 		for (int k = 0; k < 10; k++)
@@ -73,6 +71,7 @@ void onDisplay()
 	skybox.drawSkybox(1000.0f);
 	glTranslatef(player.x, player.z, player.y);
 	
+	glDisable(GL_LIGHTING);
 	cube.drawCube();
 	
 
