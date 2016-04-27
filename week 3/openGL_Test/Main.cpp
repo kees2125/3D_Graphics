@@ -9,8 +9,8 @@
 
 
 using namespace tmp12;
-static GLfloat g_nearPlane = 1;
-static GLfloat g_farPlane = 1001;
+static GLfloat g_nearPlane = 0.1f;
+static GLfloat g_farPlane = 101;
 static int g_Width = 800;                          // Initial window width
 static int g_Height = 600;                         // Initial window height
 static char keys[255];
@@ -36,11 +36,11 @@ void init()
 void initWorld()
 {
 	Cube::initCube();
-	for (int y = 0; y < 4;y++)
+	for (int y = 0; y < 2;y+=1)
 	{
-		for (int z = -10; z < 10; z++)
+		for (int z = -10; z < 10; z+=1)
 		{
-			for (int x = -10; x < 10;x++)
+			for (int x = -10; x < 10;x+=1)
 			{
 				worldObjects.push_back(new Cube(x, y, z, 1.0f, y+z, 0, 0));
 			}
@@ -76,7 +76,7 @@ void onDisplay()
 	
 	glRotatef(player.yaw, 1, 0, 0);
 	glRotatef(player.pitch, 0, 1, 0);
-	skybox.drawSkybox(1000.0f);
+	skybox.drawSkybox(100.0f);
 	glTranslatef(player.x, player.z, player.y);
 
 	glDisable(GL_LIGHTING);
@@ -96,6 +96,7 @@ void idle()
 	float deltaTime = frameTime - lastFrameTime;
 	bool colided = false;
 	lastFrameTime = frameTime;
+	player.updatePlayer();
 	if (!player.gravityEffected)
 	{
 		if (keys[32]) moveVertical(true, deltaTime);
@@ -105,7 +106,7 @@ void idle()
 	{
 		for (unsigned int i = 0; i < worldObjects_size;i++)
 		{
-			if (worldObjects[i]->cubeInObject(player.xMin,player.xMax,player.yMin,player.yMax,player.zMin,player.zMax))
+			if (worldObjects[i]->pointInObject(player.x,player.y,player.z) || worldObjects[i]->pointInObject(player.xMin, player.y, player.z) || worldObjects[i]->pointInObject(player.xMax, player.y, player.z) || worldObjects[i]->pointInObject(player.x, player.y, player.zMin) || worldObjects[i]->pointInObject(player.x, player.y, player.zMax))
 			{
 				colided = true;
 				printf("true");
@@ -114,7 +115,7 @@ void idle()
 		}
 		if (!colided)
 		{
-			moveVertical(false, 0.01f);
+			moveVertical(false, 0.001f);
 		}
 	}
 	if (!player.gravityEffected ||colided)

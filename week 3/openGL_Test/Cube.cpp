@@ -58,12 +58,12 @@ bool tmp12::Cube::pointInObject(float X, float Y, float Z)
 
 bool tmp12::Cube::cubeInObject(float Xmin, float Xmax, float Ymin, float Ymax, float Zmin, float Zmax)
 {
-	return(xMax > Xmin &&
-		xMin < Xmax &&
-		yMax > Ymin &&
-		yMin < Ymax &&
-		zMax > Zmin &&
-		zMin < Zmax);
+	return(xMax >= Xmin &&
+		xMin <= Xmax &&
+		yMax >= Ymin &&
+		yMin <= Ymax &&
+		zMax >= Zmin &&
+		zMin <= Zmax );
 
 }
 

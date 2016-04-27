@@ -17,5 +17,6 @@ namespace tmp12 {
 		float yMax;
 		float zMin;
 		float zMax;
+		void updatePlayer();
 	};
 }
