@@ -52,17 +52,17 @@ void initWorld()
 void move(float angle, float fac) 
 {
 	player.x += (float)cos((player.pitch + angle) / 180 * M_PI) * fac;
-	player.y += (float)sin((player.pitch + angle) / 180 * M_PI) * fac;
+	player.z += (float)sin((player.pitch + angle) / 180 * M_PI) * fac;
 }
 void moveVertical(bool moveUp,float fac)
 {
 	if (moveUp)
 	{
-		player.z -= player.speed *fac;
+		player.y -= player.speed *fac;
 	}
 	else
 	{
-		player.z += player.speed *fac;
+		player.y += player.speed *fac;
 	}
 }
 
@@ -77,7 +77,7 @@ void onDisplay()
 	glRotatef(player.yaw, 1, 0, 0);
 	glRotatef(player.pitch, 0, 1, 0);
 	skybox.drawSkybox(100.0f);
-	glTranslatef(player.x, player.z, player.y);
+	glTranslatef(player.x, player.y, player.z);
 
 	glDisable(GL_LIGHTING);
 	
@@ -106,7 +106,7 @@ void idle()
 	{
 		for (unsigned int i = 0; i < worldObjects_size;i++)
 		{
-			if (worldObjects[i]->pointInObject(player.x,player.y,player.z) || worldObjects[i]->pointInObject(player.xMin, player.y, player.z) || worldObjects[i]->pointInObject(player.xMax, player.y, player.z) || worldObjects[i]->pointInObject(player.x, player.y, player.zMin) || worldObjects[i]->pointInObject(player.x, player.y, player.zMax))
+			if (worldObjects[i]->cubeInObject(player.xMin,player.xMax,player.yMin,player.yMax,player.zMin,player.zMax))
 			{
 				colided = true;
 				printf("true");
@@ -122,7 +122,7 @@ void idle()
 	{
 		if (keys['a']) move(0, deltaTime*player.speed);
 		if (keys['d']) move(180, deltaTime*player.speed);
-		if (keys['w']) { move(90, deltaTime*player.speed); printf("%f,%f,%f\n", player.x, player.y, player.z); }
+		if (keys['w']) {move(90, deltaTime*player.speed); }
 		if (keys['s']) move(270, deltaTime*player.speed);
 	}
 	glutPostRedisplay();

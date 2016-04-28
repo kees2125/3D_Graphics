@@ -10,10 +10,10 @@ Player::Player()
 	z = 0;
 	pitch = 0;
 	yaw = 0;
-	speed = 30.0f;
-	height = 0.5f;
-	width = 0.5f;
-	depth = 0.5f;
+	speed = 3.0f;
+	height = 4.5f;
+	width = 1.5f;
+	depth = 1.5f;
 	xMin = -width / 2 + x;
 	xMax = width / 2 + x;
 	yMin = -height / 2 + y;
