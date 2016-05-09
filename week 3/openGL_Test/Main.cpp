@@ -46,7 +46,15 @@ void initWorld()
 			}
 		}
 	}
+	worldObjects.push_back(new Cube(5, 3, 5, 1.0f, 2, 0, 0));
 
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	float amb[] = { 0.2,0.2,0.2 };
+	float dif[] = { 1.0,1.0,1.0 };
+	glLightfv(GL_LIGHT0, GL_AMBIENT,amb);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE,dif);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, amb);
 	worldObjects_size = worldObjects.size();
 }
 void move(float angle, float fac) 
@@ -54,7 +62,7 @@ void move(float angle, float fac)
 	player.x += (float)cos((player.pitch + angle) / 180 * M_PI) * fac;
 	player.z += (float)sin((player.pitch + angle) / 180 * M_PI) * fac;
 }
-void moveVertical(bool moveUp,float fac)
+void moveVertical(bool moveUp, float fac)
 {
 	if (moveUp)
 	{
@@ -73,13 +81,13 @@ void onDisplay()
 	
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	
+	float pos[] = { player.x,player.y,player.z };
+	glLightfv(GL_LIGHT0, GL_POSITION, pos);
 	glRotatef(player.yaw, 1, 0, 0);
 	glRotatef(player.pitch, 0, 1, 0);
 	skybox.drawSkybox(100.0f);
 	glTranslatef(player.x, player.y, player.z);
-
-	glDisable(GL_LIGHTING);
+	
 	
 	for (unsigned int i = 0; i < worldObjects_size;i++)
 	{

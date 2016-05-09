@@ -88,7 +88,7 @@ void Cube::draw()
 	glEnable(GL_TEXTURE_2D);        //and turn on texturing
 	glBindTexture(GL_TEXTURE_2D, textureLiberyID);  //use the texture we want
 	glBegin(GL_QUADS);      //and draw a face
-							//back face
+	glNormal3f(0.0, 0.0, 1.0);						//back face
 	glTexCoord2f(aX, aY);      //use the correct texture coordinate
 	glVertex3f(size / 2 +x, size / 2 + y, size / 2 + z);       //and a vertex
 	glTexCoord2f(bX, aY);      //and repeat it...
@@ -101,6 +101,7 @@ void Cube::draw()
 	//glBindTexture(GL_TEXTURE_2D, skyBoxSides[SKY_LEFT]);
 	glBegin(GL_QUADS);
 	//left face
+	glNormal3f(-1.0, 0.0, 0.0);
 	glTexCoord2f(aX, aY);
 	glVertex3f(-size / 2 + x, size / 2 + y, size / 2 + z);
 	glTexCoord2f(bX, aY);
@@ -113,6 +114,7 @@ void Cube::draw()
 	//glBindTexture(GL_TEXTURE_2D, skyBoxSides[SKY_FRONT]);
 	glBegin(GL_QUADS);
 	//front face
+	glNormal3f(0.0, 0.0, -1.0);
 	glTexCoord2f(bX, aY);
 	glVertex3f(size / 2 + x, size / 2 + y, -size / 2 + z);
 	glTexCoord2f(aX, aY);
@@ -125,6 +127,7 @@ void Cube::draw()
 	//glBindTexture(GL_TEXTURE_2D, skyBoxSides[SKY_RIGHT]);
 	glBegin(GL_QUADS);
 	//right face
+	glNormal3f(1.0, 0.0, 0.0);
 	glTexCoord2f(aX, aY);
 	glVertex3f(size / 2 + x, size / 2 + y, -size / 2 + z);
 	glTexCoord2f(bX, aY);
@@ -135,7 +138,8 @@ void Cube::draw()
 	glVertex3f(size / 2 + x, -size / 2 + y, -size / 2 + z);
 	glEnd();
 	//glBindTexture(GL_TEXTURE_2D, skyBoxSides[SKY_TOP]);
-	glBegin(GL_QUADS);                      //top face
+	glBegin(GL_QUADS); 
+	glNormal3f(0.0, 1.0, 0.0);//top face
 	glTexCoord2f(bX, aY);
 	glVertex3f(size / 2 + x, size / 2 + y, size / 2 + z);
 	glTexCoord2f(aX, aY);
@@ -147,6 +151,7 @@ void Cube::draw()
 	glEnd();
 	//glBindTexture(GL_TEXTURE_2D, skyBoxSides[SKY_BOTTOM]);
 	glBegin(GL_QUADS);
+	glNormal3f(0.0, -1.0, 0.0);
 	//bottom face
 	glTexCoord2f(bX, bY);
 	glVertex3f(size / 2 + x, -size / 2 + y, size / 2 + z);
