@@ -206,8 +206,8 @@ void ObjModel::draw()
 		{
 			for(Vertex vertex : face.vertices)
 			{
-				glNormal3f(vertices[vertex.normal].x, vertices[vertex.normal].y, vertices[vertex.normal].z);
-				glTexCoord2f(vertices[vertex.texcoord].x, vertices[vertex.texcoord].y);
+				glNormal3f(normals[vertex.normal].x, normals[vertex.normal].y, normals[vertex.normal].z);
+				glTexCoord2f(texcoords[vertex.texcoord].x, texcoords[vertex.texcoord].y);
 				glVertex3f(vertices[vertex.position].x, vertices[vertex.position].y, vertices[vertex.position].z);
 			}
 			
