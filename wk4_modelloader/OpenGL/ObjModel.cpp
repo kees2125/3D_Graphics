@@ -162,7 +162,7 @@ ObjModel::~ObjModel(void)
 
 void ObjModel::draw()
 {
-	glBegin(GL_QUADS);
+	/*glBegin(GL_QUADS);
 	glNormal3f(-1,0,0);
 	glVertex3f(-10,-10,-10);
 	glVertex3f(-10,-10,10);
@@ -195,19 +195,19 @@ void ObjModel::draw()
 	glVertex3f(-10,10,-10);
 	glVertex3f(10,10,-10);
 	glVertex3f(10,-10,-10);
-	glEnd();
-	/*
-	foreach(group in groups)
+	glEnd();*/
+	
+	for(ObjGroup* group : groups)
 	{
-		zet het materiaal / texture van deze groep
+		//zet het materiaal / texture van deze groep
 
 		glBegin(GL_TRIANGLES);
-		foreach(face in group.faces)
+		for(Face face : group->faces)
 		{
-			foreach(vertex in face.vertices)
+			for(Vertex vertex : face.vertices)
 			{
-				glNormal
-				glTexCoord
+				glNormal3f(vertices[vertex.normal].x, vertices[vertex.normal].y, vertices[vertex.normal].z);
+				glTexCoord2f(vertices[vertex.texcoord].x, vertices[vertex.texcoord].y);
 				glVertex3f(vertices[vertex.position].x, vertices[vertex.position].y, vertices[vertex.position].z);
 			}
 			
@@ -216,7 +216,7 @@ void ObjModel::draw()
 
 	}
 	
-	*/
+	
 
 
 }
