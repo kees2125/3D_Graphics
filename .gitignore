@@ -9,3 +9,5 @@ bld/
 [Bb]in/
 #[Oo]bj/
 [Ll]og/
+wk4_modelloader/OpenGL.sdf
+wk4_modelloader/OpenGL/models/normalstuff/normaltest.mtl
