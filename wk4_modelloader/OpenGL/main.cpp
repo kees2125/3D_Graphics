@@ -4,6 +4,7 @@
 #include <gl/glu.h>
 #include <math.h>
 #include "ObjModel.h"
+#include "stb_image.h"
 
 
 float rotation = 0;
@@ -40,6 +41,7 @@ void InitGraphics(void)
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
+	glEnable(GL_TEXTURE_2D);
 
 	models.push_back(pair<int, ObjModel*>(75, new ObjModel("models/car/honda_jazz.obj")));
 	models.push_back(pair<int, ObjModel*>(1, new ObjModel("models/bloemetje/PrimRoseP.obj")));

@@ -6,6 +6,7 @@
 
 #include <windows.h>
 #include <gl/GL.h>
+#include "Texture.h"
 
 using namespace std;
 
@@ -66,6 +67,7 @@ private:
 		MaterialInfo();
 		std::string name;
 		bool hasTexture;
+		Texture *texture;
 	};
 
 	class ObjGroup

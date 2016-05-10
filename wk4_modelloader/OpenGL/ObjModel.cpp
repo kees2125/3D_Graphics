@@ -40,9 +40,6 @@ inline std::string toLower(std::string data)
 	return data;
 }
 
-
-
-
 ObjModel::ObjModel(std::string fileName)
 {
 	std::string dirName = fileName;
@@ -202,12 +199,14 @@ void ObjModel::draw()
 		//zet het materiaal / texture van deze groep
 
 		glBegin(GL_TRIANGLES);
+		
 		for(Face face : group->faces)
 		{
 			for(Vertex vertex : face.vertices)
 			{
-				glNormal3f(vertices[vertex.normal].x, vertices[vertex.normal].y, vertices[vertex.normal].z);
-				glTexCoord2f(vertices[vertex.texcoord].x, vertices[vertex.texcoord].y);
+				materials[0]->texture->bind();
+				glNormal3f(normals[vertex.normal].x, normals[vertex.normal].y, normals[vertex.normal].z);
+				glTexCoord2f(texcoords[vertex.texcoord].x, texcoords[vertex.texcoord].y);
 				glVertex3f(vertices[vertex.position].x, vertices[vertex.position].y, vertices[vertex.position].z);
 			}
 			
@@ -215,8 +214,6 @@ void ObjModel::draw()
 		glEnd();
 
 	}
-	
-	
 
 
 }
@@ -268,7 +265,7 @@ void ObjModel::loadMaterialFile( std::string fileName, std::string dirName )
 		else if(params[0] == "map_kd")
 		{
 			currentMaterial->hasTexture = true;
-//			currentMaterial->texture = new Texture(dirName + "/" + params[1]);
+			currentMaterial->texture = new Texture(dirName + "/" + params[1]);
 		}
 		else
 			std::cout<<"Didn't parse "<<params[0]<<" in material file"<<std::endl;
@@ -281,6 +278,7 @@ void ObjModel::loadMaterialFile( std::string fileName, std::string dirName )
 ObjModel::MaterialInfo::MaterialInfo()
 {
 	hasTexture = false;
+	Texture *texture;
 }
 
 
