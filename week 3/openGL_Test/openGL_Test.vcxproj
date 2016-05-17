@@ -147,14 +147,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BubblePartical.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Partical.cpp" />
+    <ClCompile Include="ParticalEmitter.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="skyBox.cpp" />
     <ClCompile Include="WorldObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BubblePartical.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="Partical.h" />
+    <ClInclude Include="ParticalEmitter.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="skyBox.h" />
     <ClInclude Include="stb_image.h" />

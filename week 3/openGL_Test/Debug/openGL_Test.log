@@ -1,5 +1,4 @@
-﻿  Main.cpp
-c:\users\kees2125\documents\github\3d_graphics\week 3\opengl_test\main.cpp(45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\kees2125\documents\github\3d_graphics\week 3\opengl_test\main.cpp(53): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
-c:\users\kees2125\documents\github\3d_graphics\week 3\opengl_test\main.cpp(53): warning C4305: 'initializing': truncation from 'double' to 'float'
+﻿  ParticalEmitter.cpp
+c:\users\kees2125\documents\github\3d_graphics\week 3\opengl_test\particalemitter.cpp(44): warning C4018: '<': signed/unsigned mismatch
+c:\users\kees2125\documents\github\3d_graphics\week 3\opengl_test\particalemitter.cpp(70): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   openGL_Test.vcxproj -> C:\Users\kees2125\Documents\GitHub\3D_Graphics\week 3\Debug\openGL_Test.exe

@@ -85,7 +85,7 @@ void Cube::draw()
 	bY = 0.0625f;*/
 	glRotatef(pitch, x+1, y, z);
 	glRotatef(yaw, x, y+1, z);
-	glEnable(GL_TEXTURE_2D);        //and turn on texturing
+	glEnable(GL_TEXTURE_2D); //and turn on texturing
 	glBindTexture(GL_TEXTURE_2D, textureLiberyID);  //use the texture we want
 	glBegin(GL_QUADS);      //and draw a face
 	glNormal3f(0.0, 0.0, 1.0);						//back face

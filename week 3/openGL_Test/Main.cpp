@@ -5,6 +5,7 @@
 #include "Cube.h"
 #include "skyBox.h"
 #include <vector>
+#include "ParticalEmitter.h"
 
 
 
@@ -21,6 +22,7 @@ std::vector<WorldObject *> worldObjects;
 std::vector<WorldObject *>::size_type worldObjects_size;
 Player player;
 skyBox skybox;
+ParticalEmitter *particalEmitter;
 
 
 void init()
@@ -56,6 +58,8 @@ void initWorld()
 	glLightfv(GL_LIGHT0, GL_DIFFUSE,dif);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, amb);
 	worldObjects_size = worldObjects.size();
+	particalEmitter = new ParticalEmitter(10, 5, 0, 0, 0);
+	
 }
 void move(float angle, float fac) 
 {
@@ -93,12 +97,12 @@ void onDisplay()
 	{
 		worldObjects[i]->draw();
 	}
-	
+	particalEmitter->drawParticals();
 
 	
 	glutSwapBuffers();
 }
-void idle()
+void timerfunc(int i)
 {
 	float frameTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
 	float deltaTime = frameTime - lastFrameTime;
@@ -112,9 +116,9 @@ void idle()
 	}
 	else
 	{
-		for (unsigned int i = 0; i < worldObjects_size;i++)
+		for (unsigned int i = 0; i < worldObjects_size; i++)
 		{
-			if (worldObjects[i]->cubeInObject(player.xMin,player.xMax,player.yMin,player.yMax,player.zMin,player.zMax))
+			if (worldObjects[i]->cubeInObject(player.xMin, player.xMax, player.yMin, player.yMax, player.zMin, player.zMax))
 			{
 				colided = true;
 				printf("true");
@@ -126,14 +130,19 @@ void idle()
 			moveVertical(false, 0.001f);
 		}
 	}
-	if (!player.gravityEffected ||colided)
+	if (!player.gravityEffected || colided)
 	{
 		if (keys['a']) move(0, deltaTime*player.speed);
 		if (keys['d']) move(180, deltaTime*player.speed);
-		if (keys['w']) {move(90, deltaTime*player.speed); }
+		if (keys['w']) { move(90, deltaTime*player.speed); }
 		if (keys['s']) move(270, deltaTime*player.speed);
 	}
 	glutPostRedisplay();
+
+	glutTimerFunc(16, timerfunc, 0);
+}
+void idle()
+{
 	
 }
 void reshape(GLint width, GLint height)
@@ -197,6 +206,7 @@ int main(int argc, char *argv[])
 	glutKeyboardUpFunc(keyboardUp);
 	glutPassiveMotionFunc(mouseMoveFuct);
 	glutIdleFunc(idle);
+	glutTimerFunc(16, timerfunc, 0);
 	initWorld();
 	glutMainLoop();
 }
