@@ -58,7 +58,7 @@ void initWorld()
 	glLightfv(GL_LIGHT0, GL_DIFFUSE,dif);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, amb);
 	worldObjects_size = worldObjects.size();
-	particalEmitter = new ParticalEmitter(10, 5, 0, 0, 0);
+	particalEmitter = new ParticalEmitter(2, 1, 0, 0, 0);
 	
 }
 void move(float angle, float fac) 

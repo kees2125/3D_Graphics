@@ -50,7 +50,7 @@ void ParticalEmitter::update()
 		}	
 		else
 		{
-			particalList[i]->y += 0.000001f * rand();
+			particalList[i]->y += 0.01f;;
 		}
 			
 	}
@@ -65,9 +65,10 @@ void ParticalEmitter::update()
 
 void ParticalEmitter::Init()
 {
+	printf("%d,", rand());
 	for (int i = intensity; i > 0; i--)
 	{
-		particalList.push_back(new BubblePartical(x + i*0.1, y + i*0.1, z + i*0.1));
+		particalList.push_back(new BubblePartical(x + 1.0f*rand()/30000, y , z + 1.0f * rand() / 30000));
 	}
 	particalList_size = particalList.size();
 }
