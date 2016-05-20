@@ -5,6 +5,7 @@
 #include <cmath>
 #include "stb_image.h"
 #include <vector>
+#include <stdio.h>
 
 namespace tmp12 {
 	class WorldObject

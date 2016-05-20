@@ -1,3 +1,14 @@
-﻿  BubblePartical.cpp
-c:\users\kees2125\documents\github\3d_graphics\week 3\opengl_test\bubblepartical.cpp(16): warning C4305: 'argument': truncation from 'double' to 'float'
+﻿  SolidSphere.cpp
+c:\users\kees2125\documents\github\3d_graphics\week 3\opengl_test\solidsphere.cpp(15): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\kees2125\documents\github\3d_graphics\week 3\opengl_test\solidsphere.cpp(15): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+c:\users\kees2125\documents\github\3d_graphics\week 3\opengl_test\solidsphere.cpp(16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\kees2125\documents\github\3d_graphics\week 3\opengl_test\solidsphere.cpp(16): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+c:\users\kees2125\documents\github\3d_graphics\week 3\opengl_test\solidsphere.cpp(25): warning C4018: '<': signed/unsigned mismatch
+c:\users\kees2125\documents\github\3d_graphics\week 3\opengl_test\solidsphere.cpp(26): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\kees2125\documents\github\3d_graphics\week 3\opengl_test\solidsphere.cpp(26): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+c:\users\kees2125\documents\github\3d_graphics\week 3\opengl_test\solidsphere.cpp(27): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\kees2125\documents\github\3d_graphics\week 3\opengl_test\solidsphere.cpp(27): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+c:\users\kees2125\documents\github\3d_graphics\week 3\opengl_test\solidsphere.cpp(28): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\kees2125\documents\github\3d_graphics\week 3\opengl_test\solidsphere.cpp(28): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+c:\users\kees2125\documents\github\3d_graphics\week 3\opengl_test\solidsphere.cpp(44): warning C4018: '<': signed/unsigned mismatch
   openGL_Test.vcxproj -> C:\Users\kees2125\Documents\GitHub\3D_Graphics\week 3\Debug\openGL_Test.exe

@@ -170,7 +170,7 @@ void Cube::draw()
 
 void tmp12::Cube::initCube()
 {
-	if (true)
+	if (textureLiberyID == NULL)
 	{
 		int width, height, bpp;
 		glGenTextures(1, &textureLiberyID);
