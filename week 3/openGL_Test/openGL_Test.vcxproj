@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BillBordParticalEffects.cpp" />
     <ClCompile Include="BubblePartical.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="WorldObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BillBordParticalEffects.h" />
     <ClInclude Include="BubblePartical.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Partical.h" />

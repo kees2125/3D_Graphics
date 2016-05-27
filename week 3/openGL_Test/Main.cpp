@@ -6,6 +6,8 @@
 #include "skyBox.h"
 #include <vector>
 #include "ParticalEmitter.h"
+#include "SolidSphere.h"
+#include "BillBordParticalEffects.h"
 
 
 
@@ -23,6 +25,8 @@ std::vector<WorldObject *>::size_type worldObjects_size;
 Player player;
 skyBox skybox;
 ParticalEmitter *particalEmitter;
+SolidSphere *sphere;
+BillBordParticalEffects *fire;
 
 
 void init()
@@ -59,6 +63,8 @@ void initWorld()
 	glLightfv(GL_LIGHT0, GL_SPECULAR, amb);
 	worldObjects_size = worldObjects.size();
 	particalEmitter = new ParticalEmitter(2, 1, 0, 0, 0);
+	//sphere = new SolidSphere(0.3f, 20, 20, "resources/fireAnimate.png", 4);
+	fire = new BillBordParticalEffects(0, 5, 0, 2, "resources/fireAnimate.png", 4);
 	
 }
 void move(float angle, float fac) 
@@ -97,9 +103,8 @@ void onDisplay()
 	{
 		worldObjects[i]->draw();
 	}
-	particalEmitter->drawParticals();
-
-	
+	//particalEmitter->drawParticals();
+	fire->draw();
 	glutSwapBuffers();
 }
 void timerfunc(int i)

@@ -7,10 +7,12 @@
 	std::vector<GLfloat> normals;
 	std::vector<GLfloat> texcoords;
 	std::vector<GLushort> indices;
+	std::vector<std::vector<GLfloat>> animationTextCoords;
 
-	static unsigned int TextureID;
+	unsigned int TextureID;
 	SolidSphere::SolidSphere(float radius, unsigned int rings, unsigned int sectors,char* path)
 	{
+		animated = false;
 		TexturePath = path;
 		float const R = 1. / (float)(rings - 1);
 		float const S = 1. / (float)(sectors - 1);
@@ -50,6 +52,58 @@
 		init();
 	}
 
+	SolidSphere::SolidSphere(float radius, unsigned int rings, unsigned int sectors, char * path, int texturesxy)
+	{
+		animated = true;
+		TexturesGrid = texturesxy;
+		
+		TexturePath = path;
+		float const R = 1. / (float)(rings - 1);
+		float const S = 1. / (float)(sectors - 1);
+		int r, s;
+		animationTextCoords.resize(TexturesGrid*TexturesGrid);
+		vertices.resize(rings * sectors * 3);
+		normals.resize(rings * sectors * 3);
+		texcoords.resize(rings * sectors * 2);
+		std::vector<GLfloat>::iterator v = vertices.begin();
+		std::vector<GLfloat>::iterator n = normals.begin();
+		//std::vector<GLfloat>::iterator t = animationTextCoords.begin();
+		for (r = 0; r < rings; r++) for (s = 0; s < sectors; s++) {
+			float const y = sin(-M_PI_2 + M_PI * r * R);
+			float const x = cos(2 * M_PI * s * S) * sin(M_PI * r * R);
+			float const z = sin(2 * M_PI * s * S) * sin(M_PI * r * R);
+
+			//*t++ = s*S/TexturesGrid;
+			//*t++ = r*R/ TexturesGrid;
+			for (int i = 0; i < TexturesGrid; i++)
+			{
+				for (int k = 0; k < TexturesGrid; k++)
+				{
+					animationTextCoords[((i)*TexturesGrid)+k].push_back(s*S / TexturesGrid * (k+1));
+					animationTextCoords[((i)*TexturesGrid)+k].push_back(r*R / TexturesGrid * (i+1));
+				}
+			}
+
+			*v++ = x * radius;
+			*v++ = y * radius;
+			*v++ = z * radius;
+
+			*n++ = x;
+			*n++ = y;
+			*n++ = z;
+		}
+
+		indices.resize(rings * sectors * 4);
+		std::vector<GLushort>::iterator i = indices.begin();
+		for (r = 0; r < rings - 1; r++) for (s = 0; s < sectors - 1; s++) {
+			*i++ = r * sectors + s;
+			*i++ = r * sectors + (s + 1);
+			*i++ = (r + 1) * sectors + (s + 1);
+			*i++ = (r + 1) * sectors + s;
+		}
+		init();
+	}
+
 	void SolidSphere::draw(GLfloat x, GLfloat y, GLfloat z)
 	{
 		glPushMatrix();
@@ -63,7 +117,19 @@
 		glBindTexture(GL_TEXTURE_2D, TextureID);
 		glVertexPointer(3, GL_FLOAT, 0, &vertices[0]);
 		glNormalPointer(GL_FLOAT, 0, &normals[0]);
-		glTexCoordPointer(2, GL_FLOAT, 0, &texcoords[0]);
+		if (animated)
+		{
+			glTexCoordPointer(2, GL_FLOAT, 0, &animationTextCoords[animationcounter][0]);
+			animationcounter++;
+			if (animationcounter >= TexturesGrid*TexturesGrid)
+			{
+				animationcounter = 0;
+			}
+		}
+		else
+		{
+			glTexCoordPointer(2, GL_FLOAT, 0, &texcoords[0]);
+		}
 		glDrawElements(GL_QUADS, indices.size(), GL_UNSIGNED_SHORT, &indices[0]);
 		glPopMatrix();
 	}
