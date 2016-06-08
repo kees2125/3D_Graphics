@@ -117,19 +117,7 @@
 		glBindTexture(GL_TEXTURE_2D, TextureID);
 		glVertexPointer(3, GL_FLOAT, 0, &vertices[0]);
 		glNormalPointer(GL_FLOAT, 0, &normals[0]);
-		if (animated)
-		{
-			glTexCoordPointer(2, GL_FLOAT, 0, &animationTextCoords[animationcounter][0]);
-			animationcounter++;
-			if (animationcounter >= TexturesGrid*TexturesGrid)
-			{
-				animationcounter = 0;
-			}
-		}
-		else
-		{
-			glTexCoordPointer(2, GL_FLOAT, 0, &texcoords[0]);
-		}
+		glTexCoordPointer(2, GL_FLOAT, 0, &texcoords[0]);
 		glDrawElements(GL_QUADS, indices.size(), GL_UNSIGNED_SHORT, &indices[0]);
 		glPopMatrix();
 	}

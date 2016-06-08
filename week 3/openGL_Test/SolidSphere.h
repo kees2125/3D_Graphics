@@ -12,6 +12,5 @@ private:
 	char* TexturePath;
 	bool animated;
 	int TexturesGrid;
-	int animationcounter = 0;
 };
 

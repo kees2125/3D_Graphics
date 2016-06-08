@@ -62,7 +62,7 @@ void initWorld()
 	glLightfv(GL_LIGHT0, GL_DIFFUSE,dif);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, amb);
 	worldObjects_size = worldObjects.size();
-	particalEmitter = new ParticalEmitter(2, 1, 0, 0, 0);
+	particalEmitter = new ParticalEmitter(2, 10, 100, 0.2f, 0, 0, 0);
 	//sphere = new SolidSphere(0.3f, 20, 20, "resources/fireAnimate.png", 4);
 	fire = new BillBordParticalEffects(0, 5, 0, 2, "resources/fireAnimate.png", 4);
 	
@@ -103,7 +103,7 @@ void onDisplay()
 	{
 		worldObjects[i]->draw();
 	}
-	//particalEmitter->drawParticals();
+	particalEmitter->drawParticals();
 	fire->draw();
 	glutSwapBuffers();
 }

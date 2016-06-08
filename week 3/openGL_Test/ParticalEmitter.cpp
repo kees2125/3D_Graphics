@@ -3,12 +3,12 @@
 
 
 
-
-ParticalEmitter::ParticalEmitter( int Intensity, float Interval,float X, float Y, float Z)
+ParticalEmitter::ParticalEmitter(int id, int Intensity, float Interval, float Radius,float X, float Y, float Z)
 {
-	//BaseParticel = p;
+	ID = id;
 	intensity = Intensity;
 	interval = Interval;
+	radius = Radius;
 	x = X;
 	y = Y;
 	z = Z;
@@ -19,16 +19,7 @@ ParticalEmitter::~ParticalEmitter()
 {
 }
 
-void ParticalEmitter::setPartical(Partical p, int Intensity, float Interval,float X, float Y, float Z)
-{
-	BaseParticel = p;
-	intensity = Intensity;
-	interval = Interval;
-	x = X;
-	y = Y;
-	z = Z;
-	
-}
+
 
 void ParticalEmitter::drawParticals()
 {
@@ -68,7 +59,17 @@ void ParticalEmitter::Init()
 	printf("%d,", rand());
 	for (int i = intensity; i > 0; i--)
 	{
-		particalList.push_back(new BubblePartical(x + 1.0f*rand()/30000, y , z + 1.0f * rand() / 30000));
+		switch (ID)
+		{
+		case 1:
+			particalList.push_back(new BubblePartical(x + radius*rand() / 30000, y + radius * rand() / 30000, z + radius * rand() / 30000));
+			break;
+		case 2:
+			particalList.push_back(new smokeParticle(x + radius*rand() / 30000, y + radius * rand() / 30000, z + radius * rand() / 30000));
+			break;
+		}
+		
+		
 	}
 	particalList_size = particalList.size();
 }

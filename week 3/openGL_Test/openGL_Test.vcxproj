@@ -155,6 +155,7 @@
     <ClCompile Include="ParticalEmitter.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="skyBox.cpp" />
+    <ClCompile Include="smokeParticle.cpp" />
     <ClCompile Include="SolidSphere.cpp" />
     <ClCompile Include="WorldObject.cpp" />
   </ItemGroup>
@@ -166,6 +167,7 @@
     <ClInclude Include="ParticalEmitter.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="skyBox.h" />
+    <ClInclude Include="smokeParticle.h" />
     <ClInclude Include="SolidSphere.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="WorldObject.h" />

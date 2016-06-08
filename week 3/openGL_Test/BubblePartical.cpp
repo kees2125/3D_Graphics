@@ -1,5 +1,5 @@
 #include "BubblePartical.h"
-#include"SolidSphere.h"
+
 
 
 
@@ -32,4 +32,9 @@ void BubblePartical::draw()
 	bubble->draw(x, y, z);
 	//glColor3f(0.9f, 0.3f, 0.2f);
 	glTranslated(-x, -y, -z);
+}
+
+int BubblePartical::getID()
+{
+	return 1;
 }
