@@ -8,6 +8,7 @@
 #include "ParticalEmitter.h"
 #include "SolidSphere.h"
 #include "BillBordParticalEffects.h"
+#include "ObjModel.h"
 
 
 
@@ -27,6 +28,7 @@ skyBox skybox;
 ParticalEmitter *particalEmitter;
 SolidSphere *sphere;
 BillBordParticalEffects *fire;
+ObjModel *ketel;
 
 
 void init()
@@ -48,7 +50,7 @@ void initWorld()
 		{
 			for (int x = -10; x < 10;x+=1)
 			{
-				worldObjects.push_back(new Cube(x, y, z, 1.0f,, 0, 0));
+				worldObjects.push_back(new Cube(x, y, z, 1.0f,1, 0, 0));
 			}
 		}
 	}
@@ -65,6 +67,7 @@ void initWorld()
 	//particalEmitter = new ParticalEmitter(2, 10, 100, 0.2f, 0, 0, 0);
 	//sphere = new SolidSphere(0.3f, 20, 20, "resources/fireAnimate.png", 4);
 	fire = new BillBordParticalEffects(0, 3, 0, 2, "resources/fireAnimate.png", 4);
+	ketel = new ObjModel("models/ketel/ketel.obj");
 	
 }
 void move(float angle, float fac) 
@@ -105,6 +108,8 @@ void onDisplay()
 	}
 	//particalEmitter->drawParticals();
 	fire->draw();
+	glTranslated(2, 4, 5);
+	ketel->draw();
 	glutSwapBuffers();
 }
 void timerfunc(int i)
