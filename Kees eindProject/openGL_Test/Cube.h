@@ -12,6 +12,7 @@ namespace tmp12 {
 		bool cubeInObject(float Xmin, float Xmax, float Ymin, float Ymax, float Zmin, float Zmax);
 		int cubeID;
 		int blockType;
+		bool moveingForward;
 		float xMin;
 		float xMax;
 		float yMin;

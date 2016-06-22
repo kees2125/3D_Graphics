@@ -23,7 +23,7 @@ tmp12::Cube::Cube(float X, float Y, float Z, float Size, int type, float Pitch, 
 	yMax =  size / 2 + y;
 	zMin = -size / 2 + z;
 	zMax =  size / 2 + z;
-
+	moveingForward = true;
 	switch (type)
 	{
 	case grass:

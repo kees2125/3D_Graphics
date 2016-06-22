@@ -9,6 +9,7 @@
 #include "SolidSphere.h"
 #include "BillBordParticalEffects.h"
 #include "ObjModel.h"
+#include "plannet.h"
 
 
 
@@ -29,6 +30,8 @@ ParticalEmitter *particalEmitter;
 SolidSphere *sphere;
 BillBordParticalEffects *fire;
 ObjModel *ketel;
+plannet *Plannet;
+
 
 
 void init()
@@ -51,10 +54,11 @@ void initWorld()
 			for (int x = -10; x < 10;x+=1)
 			{
 				worldObjects.push_back(new Cube(x, y, z, 1.0f,1, 0, 0));
+				worldObjects.push_back(new Cube(30+x, y, z, 1.0f, 0, 0, 0));
 			}
 		}
 	}
-	//worldObjects.push_back(new Cube(0, 3, 0, 1.0f, 2, 0, 0));
+	worldObjects.push_back(new Cube(10, 1, 0, 1.0f, 2, 0, 0));
 
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
@@ -66,8 +70,9 @@ void initWorld()
 	worldObjects_size = worldObjects.size();
 	//particalEmitter = new ParticalEmitter(2, 10, 100, 0.2f, 0, 0, 0);
 	//sphere = new SolidSphere(0.3f, 20, 20, "resources/fireAnimate.png", 4);
-	fire = new BillBordParticalEffects(0, 3, 0, 2, "resources/fireAnimate.png", 4);
+	fire = new BillBordParticalEffects(2, 3, 4, 2, "resources/fireAnimate.png", 4);
 	ketel = new ObjModel("models/ketel/ketel.obj");
+	Plannet = new plannet(30, 5, 0,false);
 	
 }
 void move(float angle, float fac) 
@@ -107,18 +112,30 @@ void onDisplay()
 		worldObjects[i]->draw();
 	}
 	//particalEmitter->drawParticals();
-	fire->draw();
-	glTranslated(2, 4, 5);
+	glTranslated(2, 5, 5);
 	ketel->draw();
+	glTranslated(-2, -5, -5);
+	Plannet->draw();
+	fire->draw();
+	
+	
 	glutSwapBuffers();
+}
+void slowTick(int i)
+{
+	
+	glutTimerFunc(1000, slowTick, 0);
 }
 void timerfunc(int i)
 {
 	float frameTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
 	float deltaTime = frameTime - lastFrameTime;
 	bool colided = false;
+	bool onMoving = false;
+	float movingSpeed = 0.16f;
 	lastFrameTime = frameTime;
 	player.updatePlayer();
+	
 	if (!player.gravityEffected)
 	{
 		if (keys[32]) moveVertical(true, deltaTime);
@@ -131,13 +148,48 @@ void timerfunc(int i)
 			if (worldObjects[i]->cubeInObject(player.xMin, player.xMax, player.yMin, player.yMax, player.zMin, player.zMax))
 			{
 				colided = true;
-				printf("true");
+				player.Gspeed = 0.02f;
 				break;
 			}
 		}
 		if (!colided)
 		{
-			moveVertical(false, 0.001f);
+			player.Gspeed = player.Gspeed * 9.81f *0.16f;
+			if (player.Gspeed > 1.56f)
+			{
+				player.Gspeed = 1.56f;
+			}
+			player.y += player.Gspeed;
+		}
+	}
+	if (worldObjects[worldObjects_size - 1]->cubeInObject(player.xMin, player.xMax, player.yMin, player.yMax, player.zMin, player.zMax))
+	{
+		onMoving = true;
+	}
+	if (worldObjects[worldObjects_size - 1]->gravityEffected)
+	{
+		if (onMoving)
+		{
+			player.x += movingSpeed;
+		}
+		worldObjects[worldObjects_size - 1]->x += movingSpeed;
+		Plannet->x += movingSpeed;
+		if (worldObjects[worldObjects_size - 1]->x > 19)
+		{
+			worldObjects[worldObjects_size - 1]->gravityEffected = false;
+		}
+	}
+	else
+	{
+		if (onMoving)
+		{
+			player.x -= movingSpeed;
+		}
+		worldObjects[worldObjects_size - 1]->x -= movingSpeed;
+		Plannet->x -= movingSpeed;
+		if (worldObjects[worldObjects_size - 1]->x < 10)
+		{
+			worldObjects[worldObjects_size - 1]->gravityEffected = true;
 		}
 	}
 	if (!player.gravityEffected || colided)
@@ -147,6 +199,7 @@ void timerfunc(int i)
 		if (keys['w']) { move(90, deltaTime*player.speed); }
 		if (keys['s']) move(270, deltaTime*player.speed);
 	}
+	Plannet->update();
 	glutPostRedisplay();
 
 	glutTimerFunc(16, timerfunc, 0);
@@ -217,6 +270,7 @@ int main(int argc, char *argv[])
 	glutPassiveMotionFunc(mouseMoveFuct);
 	glutIdleFunc(idle);
 	glutTimerFunc(16, timerfunc, 0);
+	//glutTimerFunc(1000, slowTick, 0);
 	initWorld();
 	glutMainLoop();
 }

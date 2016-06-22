@@ -28,7 +28,6 @@ namespace tmp12 {
 		float getYaw();
 		float getPitch();*/
 
-	protected:
 		
 	};
 }

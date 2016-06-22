@@ -20,6 +20,7 @@ Player::Player()
 	yMax = height / 2 + y;
 	zMin = -depth / 2 + z;
 	zMax = depth/ 2 + z;
+	Gspeed = 0.02f;
 }
 
 

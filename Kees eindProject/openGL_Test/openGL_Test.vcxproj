@@ -154,6 +154,7 @@
     <ClCompile Include="ObjModel.cpp" />
     <ClCompile Include="Partical.cpp" />
     <ClCompile Include="ParticalEmitter.cpp" />
+    <ClCompile Include="plannet.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="skyBox.cpp" />
     <ClCompile Include="smokeParticle.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="ObjModel.h" />
     <ClInclude Include="Partical.h" />
     <ClInclude Include="ParticalEmitter.h" />
+    <ClInclude Include="plannet.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="skyBox.h" />
     <ClInclude Include="smokeParticle.h" />
