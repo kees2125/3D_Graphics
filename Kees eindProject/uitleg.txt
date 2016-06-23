@@ -1,0 +1,6 @@
+Controls:
+W,S,A,D voor het lopen
+SpaceBar omhoog
+Z omlaag
+G toggle God mode/gavity
+camara is de light source

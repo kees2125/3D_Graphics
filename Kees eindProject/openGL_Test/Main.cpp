@@ -16,8 +16,8 @@
 using namespace tmp12;
 static GLfloat g_nearPlane = 0.1f;
 static GLfloat g_farPlane = 101;
-static int g_Width = 800;                          // Initial window width
-static int g_Height = 600;                         // Initial window height
+static int g_Width = 1600;                          // Initial window width
+static int g_Height = 1200;                         // Initial window height
 static char keys[255];
 static int mouseX, mouseY;
 bool godMode = 1;
